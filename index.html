@@ -1,1 +1,74 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ChatWatts</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f7f7f7;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .chat-box {
+            width: 400px;
+            max-width: 100%;
+            height: 500px;
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+        }
+        .messages {
+            flex: 1;
+            padding: 10px;
+            overflow-y: scroll;
+            border-bottom: 1px solid #ddd;
+        }
+        .input-area {
+            display: flex;
+        }
+        .input-area input {
+            width: 80%;
+            padding: 10px;
+            border: none;
+            border-top: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        .input-area button {
+            width: 20%;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-top: 1px solid #ddd;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="chat-box">
+        <div class="messages" id="messages"></div>
+        <div class="input-area">
+            <input type="text" id="messageInput" placeholder="Digite sua mensagem...">
+            <button id="sendButton">Enviar</button>
+        </div>
+    </div>
+
+    <script>
+        // Conectar ao WebSocket
+        const socket = new WebSocket('ws://seu-servidor-websocket.com'); // Substitua pelo seu servidor WebSocket real
+
+        // Referência para a área de mensagens e o input
+        const messagesContainer = document.getElementById('messages');
+        const messageInput = document.getElementById('messageInput');
+        const sendButton = document.getElementById('sendButton');
+
+        // Quando a conexão WebSocket
 
