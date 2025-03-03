@@ -62,13 +62,45 @@
     </div>
 
     <script>
-        // Conectar ao WebSocket
-        const socket = new WebSocket('ws://seu-servidor-websocket.com'); // Substitua pelo seu servidor WebSocket real
+        // Substitua essa URL pela URL do seu servidor WebSocket na nuvem
+        const socket = new WebSocket('wss://echo.websocket.org'); // Usando um servidor WebSocket público para teste
 
-        // Referência para a área de mensagens e o input
+        // Referências para elementos
         const messagesContainer = document.getElementById('messages');
         const messageInput = document.getElementById('messageInput');
         const sendButton = document.getElementById('sendButton');
 
-        // Quando a conexão WebSocket
+        // Quando a conexão WebSocket for aberta
+        socket.onopen = function() {
+            console.log('Conexão WebSocket aberta!');
+        };
+
+        // Quando o servidor enviar uma mensagem
+        socket.onmessage = function(event) {
+            const message = event.data;
+            const newMessageElement = document.createElement('p');
+            newMessageElement.textContent = message;
+            messagesContainer.appendChild(newMessageElement);
+            messagesContainer.scrollTop = messagesContainer.scrollHeight; // Rolar até a última mensagem
+        };
+
+        // Quando o botão "Enviar" for pressionado
+        sendButton.onclick = function() {
+            const message = messageInput.value;
+            if (message) {
+                socket.send(message); // Envia a mensagem para o servidor WebSocket
+                messageInput.value = ''; // Limpa o campo de input
+            }
+        };
+
+        // Enviar mensagem ao pressionar "Enter"
+        messageInput.addEventListener('keydown', function(event) {
+            if (event.key === 'Enter') {
+                sendButton.click();
+            }
+        });
+    </script>
+
+</body>
+</html>
 
